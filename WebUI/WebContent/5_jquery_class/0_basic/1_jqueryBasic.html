@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title> 첫 연습 </title>
+	
+<style type="text/css">
+#here {
+	position : absolute;
+	top: 0;
+	left: 0;
+}
+</style>
+<!-- <script type="text/javascript" src='../lib/jquery-3.4.1.min.js'></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var here = $('#here');
+		
+		//here.fadeOut(1000).fadeIn('slow');
+		//here.slideUp('slow').slideDown(1000);
+		here.animate({top:200, left:400});
+		
+		var std = $('#student');
+		var n = std.find('#name');
+		n.css({'color': '#99B4FF', 'background': '#32353D', 'font-size': '15pt'});
+		var a = std.find('#name');
+		
+/*		간단한 이벤트 확인
+ 		here.click(function(){
+			here.text('클릭하면 내용 변경2');
+		});
+		    here.mouseenter(function(){
+			here.text('마우스 들어옴');
+		});
+		here.mouseleave(function(){
+			here.text('마우스 나감');
+		});
+		here.hover(function(){
+			here.text('마우스 들어옴');
+			here.css('border', '2px solid green');
+		},function(){
+			here.text('마우스 나감');
+			here.css('border', '2px dashed red');
+		});
+		*/
+	});
+</script>
+</head>
+<body>
+	
+
+	<div id="here">아자아자 제이쿼리~~!!!</div>
+	
+	
+	<div id="student">
+		<div id="name">홍길동</div>
+		<div id="age">34</div>
+	</div>
+
+
+	
+</body>
+</html>

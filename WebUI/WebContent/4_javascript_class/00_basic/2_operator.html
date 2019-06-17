@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>2_operator</title>
+
+<script type="text/javascript">
+	// 1. == 와 === 차이점
+	var num = 10;
+	var str = '10';
+	
+	// 값만 비교
+	if(num == str) document.write('같다1 <br/>');
+	else document.write('다르다1 <br/>');
+	
+	// 값과 자료형 비교
+	if(num === str) document.write('같다2 <br/>');
+	else document.write('다르다2 <br/>');
+	
+	// 2. 실수형 계산시 주의!!!
+	document.write(0.2*3 == 0.6);			// false
+	document.write(0.2*3);					// 0.6000000000000001
+	document.write(0.2*10*3 == 0.6*10);		// true	
+</script>
+</head>
+<body>
+
+</body>
+</html>

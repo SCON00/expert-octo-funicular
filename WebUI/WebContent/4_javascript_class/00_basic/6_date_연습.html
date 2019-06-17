@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>6_date_연습.html</title>
+
+</head>
+<body>
+
+시작일 : <input type='date' id='startDate'/> ~
+종료일 : <input type='date' id='endDate'/>
+<input type='button' id='btn' value='여행일정'/>
+
+<script type="text/javascript">
+	var btn = document.getElementById('btn');
+	btn.onclick = function(){
+		//alert('확인');
+		var s = document.getElementById('startDate').value;
+		var e = document.getElementById('endDate').value;
+		//alert(typeof(s) + ":" + s + " ~ " + e);
+		// 1. 사용자 입력값을 Date 형으로 만들기
+		var sDate = new Date(s);
+		var eDate = new Date(e);
+		// 2. 두 Date 차이 (- 연산자 이용)
+		var tDate = eDate.getTime() - sDate.getTime();
+		var diffDay = Math.ceil(tDate/(60*60*24*1000));
+		// 3. 2번의 차이값을 alert 으로 출력
+		alert(diffDay + " Days");
+	}
+</script>
+</body>
+</html>

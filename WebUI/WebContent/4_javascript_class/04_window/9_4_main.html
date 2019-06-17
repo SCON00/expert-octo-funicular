@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>9_4_main.html</title>
+<script type="text/javascript">
+	function changeSite(){
+		var siteCheck = document.frm.site.value;
+		switch(siteCheck){
+		case '다음': document.getElementById('ifrm').setAttribute('src','http://www.daum.net'); break;
+		case '네이버': document.getElementById('ifrm').setAttribute('src','http://www.naver.com'); break;
+		case '네이트': document.getElementById('ifrm').setAttribute('src','http://www.nate.com'); break;
+		}
+	}
+</script>
+</head>
+<body>
+
+<form name="frm">
+		<input type="radio" name="site" onclick="changeSite()" value='다음'> 다음
+		<input type="radio" name="site" onclick="changeSite()" value='네이버'> 네이버
+		<input type="radio" name="site" onclick="changeSite()" value='네이트'> 네이트
+		
+		<br/>
+</form>
+<iframe name='ifrm' id='ifrm' width="960" height="540" src="">
+</iframe>
+</body>
+</html>

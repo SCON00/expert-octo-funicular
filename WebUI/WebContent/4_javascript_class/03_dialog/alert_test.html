@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title> Alert Test </title>
+<script type="text/javascript">
+	
+	// 1. HTML 에서 함수 호출 방식
+	function show_dialog(){
+		alert('확인');
+	}
+	
+	// 2. JS에서 요소 찾아서 이벤트함수 연결
+	window.onload = function(){
+		var ck = confirm('이 페이지는 http://playdata.io 로 이사하였습니다. GO?');
+		if(ck){
+			location.href = 'http://playdata.io';
+		}
+	}
+	
+</script>
+</head>
+<!-- <body onload="show_dialog()"> -->
+<body>
+이 사이트는 조만간 운영하지 않습니다.
+</body>
+</html>

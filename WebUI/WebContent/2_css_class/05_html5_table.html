@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>05_html5_table.html</title>
+<style type="text/css">
+	body {
+		background-color: #32353D;
+	}
+	table {
+		border: 1px solid #E5E5E5;
+	}
+	th {
+		border: 1px dashed #E5E5E5;
+		background-color: #32353D;
+		color: #E5E5E5;
+	}
+	td {
+		border: 1px solid gray;
+		color: #99B4FF;
+	}
+	
+	tr:nth-child(odd) {
+		background: #32353D;
+		color: #E5E5E5;
+	}
+</style>
+</head>
+<body>
+<!-- 
+<table border='2'>
+	<tr><td>가</td><td colspan="2">가</td></tr>
+	<tr><td rowspan="2">A</td><td>A</td><td>A</td></tr>
+	<tr><td>ㄱ</td><td>ㄱ</td></tr>
+</table>
+ -->
+<table>
+	<tr><th colspan="2">부서명</th><th>전화번호 (02+)</th><th>팩스번호 (02+)</th></tr>
+	<tr><td colspan="2">종합상황실</td><td>123-1001~1005</td><td>321-1001</td></tr>
+	<tr><td rowspan="2">비서실</td><td>비서실장</td><td>123-1111</td><td rowspan="2">321-1002(사장)<br/>321-1003(감사)</td></tr>
+	<tr><td>비서실</td><td>123-1112(사장)<br/>123-1113(감사)</td></tr>
+	<tr><td rowspan="3">홍보실</td><td>홍보실장</td><td>123-1001</td><td rowspan="3">321-1101</td></tr>
+	<tr><td>홍보부</td><td>123-2001~123-2009</td></tr>
+	<tr><td>국제협력부</td><td>123-1230~1234</td></tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>9_3_sub.html</title>
+<script type="text/javascript">
+	window.onload = function(){
+		
+		document.getElementById('sub_text').value = opener.frm.selectC.value;
+		var radioCheck = document.frm.radio_btn;
+		for(var i=0; i < radioCheck.length; i++){
+			radioCheck[i].onclick = changeText;
+		}
+		function changeText(){
+			switch(radioCheck.value){
+			case '0': opener.document.getElementById('main_text').value = '가산'; break;
+			case '1': opener.document.getElementById('main_text').value = '판교'; break;
+			case '2': opener.document.getElementById('main_text').value = '부평'; break;
+			}
+			window.close();
+		}
+	}	
+</script>
+</head>
+<body>
+<form name='frm'>
+	<input type='text' id='sub_text'/><br/>
+	<input type="radio" name='radio_btn' value='0'/>가산<br/>
+	<input type="radio" name='radio_btn' value='1'/>판교<br/>
+	<input type="radio" name='radio_btn' value='2'/>부평<br/>
+</form>
+</body>
+</html>

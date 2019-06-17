@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DOM에서 노드 검색 방법</title>
+<script type="text/javascript">
+	window.onload = function(){
+		document.getElementById('btn').onclick = function(){
+			var result = document.getElementById('result');
+			
+			// 1. id 로 얻어오기
+			//var name = document.getElementById('name');
+			/* var name = document.querySelector('#name');
+			result.innerHTML = name.value + "님 반갑습니다2"; */
+			
+			// 2. classname 으로 얻어오기
+			/* var name = document.getElementsByClassName('cname'); */
+			var name = document.querySelectorAll('.cname');
+			result.innerHTML = name[0].value + "님 반갑습니다";
+			
+			// 3. tagname 으로 얻어오기
+			/* var name = document.getElementsByTagName('input');
+			result.innerHTML = name[0].value + "님 들어가세요"; */
+			
+			// 4. 폼으로 얻어오기
+			/* var name = document.fm.name;
+			result.innerHTML = name.value + "님?"; */
+		}
+	}
+  </script>
+</head>
+
+<body>
+	<!-- 1 -->
+	<form name="fm">
+		<label id="label"> 
+		이름 : <input type="text" id="name"	class="cname" name="name" size="15" /> 
+		
+		<!-- 2 --> 
+		학과 : <input	type="text" id="dept" name="dept" size="15" /> 
+		학교 : <input	type="text" id="univ" name="univ" size="15" />
+		</label>
+		
+		 <input id="btn" type="button" value="버튼" />
+		<div id="result"></div>
+	</form>
+</body>
+</html>

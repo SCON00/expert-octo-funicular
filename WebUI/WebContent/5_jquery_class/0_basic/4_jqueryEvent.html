@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jquery event</title>
+
+<style type="text/css">
+	.bg { background : yellow; }
+	.border { border : 3px dotted red; }
+</style>
+<script type="text/javascript" src='../lib/jquery-3.4.1.min.js'></script>
+<script type="text/javascript">
+$(function(){
+	// 이벤트 연결 방식
+	// bind : 매번 이벤트 연결
+	// one : 한 번 연결
+	/* 
+	$('li').bind('click', function(){
+		$('#result').text($(this).text());
+	});
+	
+	$('li').one('click', function(){
+		$('#result').text($(this).text());
+	});
+	 */
+	
+	
+	
+	$('h1').click(function(e){
+		var li = $('<li/>').text(new Date());
+		li.appendTo($('ul'));
+	});
+	$('h1').css('cursor','pointer');
+	
+	/* $('li').click(function(e){
+		$('#result').text($(this).text());
+		for(var prop in e){
+			console.log(prop + " : " + e[prop]);
+		}
+	}); */
+	
+	// 동적으로 추가된 요소는 이벤트가 적용되지 않음
+	// live() : 1.7 이전
+	$('ul').on('click','li',function(e){
+		$('#result').text($(this).text());
+		for(var prop in e){
+			console.log(prop + " : " + e[prop]);
+		}
+	});
+});
+</script>
+</head>
+<body>
+	<h1>제이쿼리 이벤트</h1>
+	 <ul>
+		<li>부에노스 아이레스</li>
+		<li>바르셀로나</li>
+		<li>리마</li>
+		<li>라파스</li>
+	 </ul>	
+	<div id="result"></div>
+</body>
+</html>

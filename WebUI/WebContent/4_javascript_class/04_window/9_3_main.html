@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>9_3_main.html</title>
+<script type="text/javascript">
+	window.onload = function(){
+		document.frm.selectC.onchange = function(){
+			var winObj = window.open('9_3_sub.html',''
+					,'width=480, height=360');
+			window.focus();
+			winObj.moveTo(screen.availWidth/4,screen.availHeight/4);	
+		}
+	}
+</script>
+</head>
+<body>
+<form name='frm'>
+	<input name='selectC' type='text' list='city' placeholder=""/>
+		<datalist id='city'>
+			<option value='서울시'></option>
+			<option value='부산시'></option>
+			<option value='인천시'></option>
+			<option value='광주시'></option>
+		</datalist>	
+	<br/>
+	<input type='text' id='main_text'/>
+</form>
+</body>
+</html>

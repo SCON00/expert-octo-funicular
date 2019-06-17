@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>06_function_arg2.html</title>
+<script type="text/javascript">
+/* 
+ * 1. 함수이름이 다른 함수의 인자가 될 수 있다
+ * 2. 함수가 다른 함수의 인자 될 수 있다
+ */
+	/* function prt(key,value){
+		document.write(key + ':' + value + '<br/>');
+	} */
+	
+	function arrayWalk(data, f){
+		for(var key in data){
+			f(key, data[key]);	
+		}		
+	}
+	
+	var ary = ['ㅁ','ㄴ','ㅇ','ㄹ','ㅎ'];
+	arrayWalk(ary, function(key,value){
+		document.write(key + ':' + value + '<br/>');
+	});
+</script>
+</head>
+<body>
+
+</body>
+</html>

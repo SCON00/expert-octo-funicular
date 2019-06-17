@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>자바스크립트 변수와 범위</title>
+	<script>
+	/* 1. 글로벌변수와 지역변수 */
+	/* var scope = '글로벌변수';
+	function getValue(){
+		var scope = '지역변수';
+		return scope;
+	}
+	document.write('1>' + getValue());	// 지역변수
+	document.write('2>' + scope);		// 글로벌변수 */
+	
+	/* 2. var 생략 가능 */
+	scope = '글로벌변수';
+	function getValue(){
+		document.write('0>' + scope + '<br/>');	// undefined
+		var scope = '지역변수';
+		return scope;
+	}
+	document.write('1>' + getValue() + '<br/>');	// 지역변수
+	document.write('2>' + scope + '<br/>');		// 글로벌변수
+	
+	/* 3. 지역변수 범위 - 함수블록에만 유효함 */
+	if(true){
+		var i = 100;
+	}
+	document.write('i=' + i + '<br/>');	// 100
+	
+	function test(){
+		var j = 1000;
+	}
+	test();
+	//document.write('j=' + j + '<br/>');	// error
+	
+	for(var k = 0; k < 3; k++){	}
+	for(var k = 0; k < 3; k++){	}
+	var k = 10;
+	var k = 100;
+	document.write('k=' + k + '<br/>');
+	
+	/* 호이스팅(hoisting) 
+		- 변수가 자신이 속한 블록 안에 있지 않고 밖으로 끌어올려지는 현상
+	*/
+	function doA(num){
+		document.write('before:' + value + '<br/>');
+		if(num%10 === 0){
+			var value = true;
+		}
+		document.write('after:' + value + '<br/>');
+	}
+	doA(10);
+	
+	</script>
+	<!-- 
+		ECMA Script 6 (ES6)
+		
+		var 사용 자제 -> let 사용 권장
+	 -->
+</head>
+
+<body>
+
+  
+ </body>
+</html>

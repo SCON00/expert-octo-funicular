@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title> 파라메터 인자</title>
+	<script>
+	// 1. 기본형 인자 (call by value)
+	var pri = 10;
+	function priParam(pri){
+		pri--;
+		return pri;
+	}
+	document.write('1>' + priParam(pri) + '<br/>');	// 9
+	document.write('2>' + pri + '<br/>');			// 10
+	// 2. 참조형 인자 (call by referrence)
+	var ref = [1,2,3,4,5];
+	function refParam(ref){
+		ref.pop();	// 스택
+		return ref;
+	}
+	document.write('1>' + refParam(ref) + '<br/>');	// 9
+	document.write('2>' + ref + '<br/>');	
+	</script>
+</head>
+
+<body>
+
+  
+ </body>
+</html>

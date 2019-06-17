@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title> Javascript 객체지향  - 상속 </title>
+</head>
+<body>
+	<script>
+		// 부모클래스
+		var Animal = function(){ };
+		Animal.prototype = {
+			sound : function(){
+				document.writeln('울부짖다 <br/>');
+			},
+			move : function() {
+				document.writeln('동물은 움직인다 <br/>');
+			}
+		};
+
+		// 자식클래스
+		var Dog = function(){};
+		Dog.prototype = new Animal();	// 상속
+		
+		var dog = new Dog();			// 객체 생성
+		dog.move();							// (1) 부모 메소드 호출
+		Dog.prototype.sound = function(){	// (2) 오버라이딩
+			document.writeln('멍 <br/>');
+		}
+		dog.sound();
+		
+		Dog.prototype.tail = function(){	// (3) 추가
+			document.writeln('꼬리를 흔든다 <br/>');
+		}
+		dog.tail();
+
+	</script>
+</body>
+</html>

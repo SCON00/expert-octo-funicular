@@ -1,0 +1,18 @@
+@CHARSET "UTF-8";
+
+td.menu {
+	width : 100px;
+	height : 100px;
+	text-align : center;
+}
+
+#content {
+	width : 350px;
+	height : 300px;
+	background-color : #AACC33;	
+}
+
+/* td:hover {
+	background-color: #32353D;
+	color: #99B4FF;
+} */

@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title> Javascript 객체지향 </title>
+</head>
+<body>
+<script>
+
+// 1. 클래스 선언 - 생성자함수를 이용
+	var Student = function(name, kor, eng, math){
+		this.name = name;
+		this.kor = kor;
+		this.eng = eng;
+		this.math = math;
+		
+	}	
+	
+	// 동적메소드 추가 -> prototype 선언
+	/* Student.prototype.display = function(){
+		return this.name + '님 ' + this.kor + '/' + this.eng + '/' + this.math +'<br/>';
+	}
+	Student.prototype.sum = function(){
+		return this.kor + this.eng + this.math;
+	} */
+	
+	Student.prototype = {
+		sum : function(){
+			return this.kor + this.eng + this.math;
+		},
+		display : function(){
+			return this.name + '님 ' + this.kor + '/' + this.eng + '/' + this.math +'<br/>';
+		}
+	}
+	var s1 = new Student('홍길동',90,80,70);
+	document.write(s1.name + " 총점:" + s1.sum() +'<br/>');
+	document.write(s1.display());
+	
+	var s2 = new Student('홍길자', 70,80,90);
+	document.write(s2.name + ' 총점:' + s2.sum() + '<br/>');
+	document.write(s2.display() + '<br/>');
+	
+	console.log(s1);
+	console.log(s2);
+</script>
+</body>
+</html>

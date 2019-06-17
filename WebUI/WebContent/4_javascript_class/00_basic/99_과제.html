@@ -1,0 +1,41 @@
+<!-- 이번달 달력을 출력하기 (JavaScript 이용) -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>99_과제.html</title>
+<script type="text/javascript">
+	var d = new Date();
+	var lastDate = new Date(d.getFullYear(), d.getMonth() + 1, 0);
+	d.setDate(1);
+	var k = d.getDate();
+	document.write('<table>');
+	document.write('<tr><th>일</td><th>월</td><th>화</td><th>수</td><th>목</td><th>금</td><th>토</td></tr>');
+	document.write('<tr>');
+	for(var i = 0; i < 7 ; i++){
+		if(i < d.getDay()){
+			document.write('<td></td>');
+		} else {
+			document.write('<td>' + k + '</td>');
+			k++;
+		}
+	}
+	document.write('</tr>');
+		
+	for(var i = 0; i < 5; i++){
+		document.write('<tr>');	
+		for(var j = 0; j < 7; j++){
+			document.write('<td>' + k + '</td>');
+			if (k >= lastDate.getDate()) break;
+			k++;
+		}
+		document.write('</tr>');
+	}	
+	
+	document.write('</table>');
+</script>
+</head>
+<body>
+
+</body>
+</html>
