@@ -10,7 +10,7 @@
 <script type="text/javascript">
 	function openWin(){
 		var id = document.frm.id.value;
-		window.open("CheckId.jsp?userId="+id,"","width=200, height=150");
+		window.open("CheckId.jsp?userId="+id,"","width=400, height=250");
 	}
 </script>
 </head>
