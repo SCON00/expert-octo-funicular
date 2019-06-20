@@ -7,11 +7,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>회원가입</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
 	function openWin(){
 		var id = document.frm.id.value;
 		window.open("CheckId.jsp?userId="+id,"","width=400, height=250");
 	}
+	
 </script>
 </head>
 <body>
@@ -47,11 +49,14 @@
 				<td width="100"><font color="blue">주소</font></td>
 				<td><input type="text" size="50" name="addr" /><br /></td>
 			</tr>
-			<tr>
+			<tr>				
 				<td width="100">
-					<!--로그인 버튼--> <input type="submit" value="회원가입">
+					<input type="submit" value="회원가입">					
 				</td>
 				<td width="100"><input type="reset" name="cancel" value="취소"><br />
+				</td>
+				<td>
+					<!--로그인 버튼--><a href="/jsp/01_basic_class/5_session/01_login/LoginForm.jsp">로그인</a> 
 				</td>
 			</tr>
 		</table>

@@ -4,8 +4,8 @@
 <% request.setCharacterEncoding("UTF-8"); %>
 
 <%
-	String id = request.getParameter("userId");
-	boolean result = MemberDao.getInstance().isDuplicatedId(id);
+	String checkId = request.getParameter("userId");
+	boolean result = MemberDao.getInstance().isDuplicatedId(checkId);
 %>
 <!DOCTYPE html>
 <html>
@@ -17,10 +17,12 @@
 $(function(){
 	$('form > input[type="button"]').click(function(){
 		var ck = <%= result %>;
+		var id = '<%= checkId %>';
+		console.log(ck + " " + id);
 		if(ck){
 			$("input[name='userId']").focus();
 		} else {
-			$("input[name='id']",opener.document).val(<%=id%>);
+			$("input[name='id']",opener.document).val(id);
 			window.close();
 		}
 	});
@@ -38,7 +40,7 @@ $(function(){
 
 <hr/>
 <form>
-	<input type='text' name='userId' value='<%=id%>' />
+	<input type='text' name='userId' value='<%=checkId%>' />
 	<input type='submit' value='중복확인'/>
 	<input type='button' value='아이디사용'/>
 	

@@ -4,9 +4,28 @@
 <%@ page import="java.util.List"%>
 
 <%
+	
+	ListMessageService lms = ListMessageService.getInstance();
+	// 페이지 수를 얻어오기
+	int pageCount = lms.getTotalPage();
+	// 페이지 번호 받기
+	String pNum = request.getParameter("page");
 	// 전체 메세지 레코드 검색 
-	List <Message> mList =  ListMessageService.getInstance().getMessageList();
+	List <Message> mList =  lms.getMessageList(pNum);
  	
+%>
+<%
+
+	//# 1."id"로 저장된 세션값을 얻어온다.
+	//# 2. 값이 null이라면 LoginForm.jsp로 페이지 이동
+	//# 3. null이 아니라면 String 형변환하여 변수에 지정
+	Object obj = session.getAttribute("id");
+	
+	if(obj == null){
+		response.sendRedirect("/jsp/01_basic_class/5_session/01_login/LoginForm.jsp");
+		return;
+	}
+	String user = (String)obj;
 %>
 <!DOCTYPE html>
 <html>
@@ -22,7 +41,7 @@ $(function(){
 </script> --%>
 </head>
 <body>
-
+	<%= user %>
 	<% if(mList.isEmpty()) { %>
 	남겨진 메세지가 하나도~~없습니다.
 	<br>
@@ -45,6 +64,11 @@ $(function(){
 
 	<% } // end if-else %>
 
-	<a href="insertMessage.jsp">글쓰기</a>
+	<a href="insertMessage.jsp">글쓰기</a><br/>
+	<!-- 페이지 번호 출력 -->
+	<% for(int i = 1; i <= pageCount; i++) { %>
+		<a href="listMessage.jsp?page=<%=i%>">[<%=i %>]</a>
+	<% } // end of for %>
+	<%=pageCount %> 페이지
 </body>
 </html>

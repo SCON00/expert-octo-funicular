@@ -26,8 +26,9 @@
 	<br />
 	<br />
 	<br />
-	<%= user %>님, 로그인 중입니다.
-
+	<%= user %>님, 로그인 중입니다.<br/>
+	<a href="/jsp/03_guest_class/listMessage.jsp">게시판 목록</a>
+	<a href="/jsp/03_guest_class/insertMessage.jsp">게시판 글쓰기</a>
 
 </body>
 </html>

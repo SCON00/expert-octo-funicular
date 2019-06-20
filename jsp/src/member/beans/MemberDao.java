@@ -97,4 +97,55 @@ public class MemberDao {
 			
 		return flag;
 	}
+	
+	/*****
+	 *  로그인 처리용 함수
+	 */
+	
+	public int login(String id, String password) throws MemberException
+	{
+		int result = 0;
+		try {
+			Connection con = DriverManager.getConnection(dbUrl,dbUser,dbPass);
+			String sql = "SELECT * FROM membertest "
+					+ "WHERE id = ? AND password = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, id);
+			ps.setString(2, password);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) result = 1;
+			rs.close();
+			ps.close();
+			con.close();
+			return result;
+		}catch( Exception ex ){
+			throw new MemberException("로그인 실행 오류  : " + ex.toString() );			
+		}
+	}
+	
+	/*****
+	 *  멤버 이름 불러오기
+	 */
+	
+	public String selectName(String id) throws MemberException
+	{
+		String name = "";
+		try {
+			Connection con = DriverManager.getConnection(dbUrl,dbUser,dbPass);
+			String sql = "SELECT name FROM membertest "
+					+ "WHERE id = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, id);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) name = rs.getString("name");
+			
+			rs.close();
+			ps.close();
+			con.close();
+			return name;
+		}catch( Exception ex ){
+			throw new MemberException("이름 검색 오류  : " + ex.toString() );			
+		}
+		
+	}
 }

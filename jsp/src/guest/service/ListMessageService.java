@@ -35,6 +35,29 @@ public class ListMessageService {
 		List <Message> mList = MessageDao.getInstance().selectList();			
 		return mList;
 	}
+	public List <Message> getMessageList(String pNum) throws MessageException
+	{
+		int pageNum = (pNum != null)? Integer.parseInt(pNum) : 1;
+		// 페이지 번호에 따른 시작 레코드 번호(startRow)와 마지막 번호(endRow) 추출
+		/*
+		 * 전체레코드 수 10
+		 * 1 페이지 : 1 ~ 3 
+		 * 2 페이지 : 4 ~ 6
+		 * 3 페이지 : 7 ~ 9
+		 * 4 페이지 : 10
+		 */
+		int startRow = countPerPage * (pageNum - 1) + 1;
+		int endRow = pageNum * countPerPage;
+		List <Message> mList = MessageDao.getInstance().selectList(startRow,endRow);			
+		return mList;
+	}
 	
-	
+	public int getTotalPage() throws MessageException{
+		// 전체 레코드 수를 얻어옴
+		totalRecCount = MessageDao.getInstance().getTotalCount();
+				
+		// 전체 페이지 수를 구함
+		pageTotalCount = totalRecCount / countPerPage + ((totalRecCount % countPerPage == 0)? 0 : 1);
+		return pageTotalCount;
+	}
 }

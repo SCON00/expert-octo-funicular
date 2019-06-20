@@ -135,8 +135,27 @@ public class MessageDao {
 		boolean isEmpty = true;
 		
 		try{
-
-
+			con = DriverManager.getConnection(dbUrl,dbUser,dbPass);
+			String sql = "SELECT * FROM "
+					+ "(SELECT ROW_NUMBER() OVER(ORDER BY message_id DESC) AS rnum, "
+					+ "MESSAGE_ID, GUEST_NAME, PASSWORD, MESSAGE "
+					+ "FROM guesttb) a "
+					+ "WHERE rnum BETWEEN ? AND ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, firstRow);
+			ps.setInt(2, endRow);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				// 각 컬럼들의 값을 가져와서 Message의 property 로 지정
+				// 그 Message 객체를 ArrayList 에 추가
+				Message m = new Message();
+				m.setMessageId(rs.getInt("message_id"));
+				m.setGuestName(rs.getString("guest_name"));
+				m.setPassword(rs.getString("password"));
+				m.setMessage(rs.getString("message"));
+				mList.add(m);
+				isEmpty = false;
+			}
 			
 			if( isEmpty ) return Collections.emptyList();
 			
@@ -163,7 +182,14 @@ public class MessageDao {
 		int count = 0;
 
 		try{
-
+			con = DriverManager.getConnection(dbUrl, dbUser, dbPass);	// 1. 연결 객체
+			String sql = "SELECT COUNT(*) cnt FROM guesttb";			// 2. SQL 문장 만들기
+			ps = con.prepareStatement(sql);								// 3. 전송객체 얻어오기
+			rs = ps.executeQuery();										// 4. 전송하기
+			if(rs.next()) {
+				count = rs.getInt("cnt");								// 5. 결과받기
+			}
+			
 			return  count;
 			
 		}catch( Exception ex ){

@@ -12,6 +12,7 @@
 <%
 	MemberDao dao = MemberDao.getInstance();
 	dao.insertMember(member);
+	session.setAttribute("id", member.getId());
 %>
 <!DOCTYPE html>
 <html>
@@ -25,5 +26,6 @@
 	이름 : <%= member.getName() %><br>
 	전화 : <%= member.getTel() %><br>
 	주소 : <%= member.getAddr() %><br>
+	<a href="/jsp/01_basic_class/5_session/01_login/MainPage.jsp">메인으로</a>
 </body>
 </html>
