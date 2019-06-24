@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+
 public class BoardDao
 {
 	
@@ -142,9 +143,25 @@ public class BoardDao
 		boolean isEmpty = true;
 		
 		try{
-
-
+			con = DriverManager.getConnection(dbUrl, dbUser, dbPass);
+			String sql = "SELECT article_id, group_id, sequence_no, posting_date, read_count, writer_name, title " 
+						+ "FROM article " 
+						+ "ORDER BY sequence_no DESC";
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
 			
+			while(rs.next()) {  
+				BoardRec br = new BoardRec();
+				br.setArticleId(rs.getInt("article_id")); 
+				br.setTitle(rs.getString("title"));
+				br.setWriterName(rs.getString("writer_name"));
+				br.setPostingDate(rs.getString("posting_date"));
+				br.setReadCount(rs.getInt("read_count"));
+				br.setSequenceNo(rs.getString("sequence_no"));
+				mList.add(br); 
+			}
+			
+			if(!mList.isEmpty()) isEmpty = false;
 			if( isEmpty ) return Collections.emptyList();
 			
 			return mList;
@@ -155,6 +172,83 @@ public class BoardDao
 			if( ps   != null ) { try{ ps.close();  } catch(SQLException ex){} }
 			if( con  != null ) { try{ con.close(); } catch(SQLException ex){} }
 		}		
+	}
+	public List<BoardRec> selectList(int firstRow, int endRow) throws BoardException
+	{
+		Connection	 		con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<BoardRec> mList = new ArrayList<BoardRec>();
+		boolean isEmpty = true;
+		
+		try{
+			con = DriverManager.getConnection(dbUrl,dbUser,dbPass);
+			String sql = "SELECT * FROM "
+					+ "(SELECT ROW_NUMBER() OVER(ORDER BY article_id DESC) AS rnum, "
+					+ "article_id, title, writer_name, posting_date, read_count, sequence_no "
+					+ "FROM article) a "
+					+ "WHERE rnum BETWEEN ? AND ?";
+			System.out.println(sql);
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, firstRow);
+			ps.setInt(2, endRow);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				// 각 컬럼들의 값을 가져와서 BoardRec의 property 로 지정
+				// 그 BoardRec 객체를 ArrayList 에 추가
+				BoardRec br = new BoardRec();
+				br.setArticleId(rs.getInt("article_id")); 
+				br.setTitle(rs.getString("title"));
+				br.setWriterName(rs.getString("writer_name"));
+				br.setPostingDate(rs.getString("posting_date"));
+				br.setReadCount(rs.getInt("read_count"));
+				br.setSequenceNo(rs.getString("sequence_no"));
+				mList.add(br); 
+			}
+			if(!mList.isEmpty()) isEmpty = false;
+			if( isEmpty ) return Collections.emptyList();
+			
+			return mList;
+		}catch( Exception ex ){
+			throw new BoardException("방명록 ) DB에 목록 검색시 오류  : " + ex.toString() );	
+		} finally{
+			if( rs   != null ) { try{ rs.close();  } catch(SQLException ex){} }
+			if( ps   != null ) { try{ ps.close();  } catch(SQLException ex){} }
+			if( con  != null ) { try{ con.close(); } catch(SQLException ex){} }
+		}		
+	}
+	
+	
+	
+	/* -------------------------------------------------------
+	 * 메세지 전체 레코드 수를 검색
+	 */
+	
+	public int getTotalCount() throws BoardException{
+		Connection	 		con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int count = 0;
+
+		try{
+			con = DriverManager.getConnection(dbUrl, dbUser, dbPass);	// 1. 연결 객체
+			String sql = "SELECT COUNT(*) cnt FROM article";			// 2. SQL 문장 만들기
+			System.out.println(sql);
+			ps = con.prepareStatement(sql);								// 3. 전송객체 얻어오기
+			rs = ps.executeQuery();										// 4. 전송하기
+			if(rs.next()) {
+				count = rs.getInt("cnt");								// 5. 결과받기
+			}
+			
+			return  count;
+			
+		}catch( Exception ex ){
+			throw new BoardException("방명록 ) DB에 목록 검색시 오류  : " + ex.toString() );	
+		} finally{
+			if( rs   != null ) { try{ rs.close();  } catch(SQLException ex){} }
+			if( ps   != null ) { try{ ps.close();  } catch(SQLException ex){} }
+			if( con  != null ) { try{ con.close(); } catch(SQLException ex){} }
+		}			
 	}
 	
 	//--------------------------------------------
@@ -222,9 +316,17 @@ public class BoardDao
 
 		PreparedStatement ps = null;
 		try{
-
-
-			return 0; // 나중에 수정된 수를 리턴하시오.
+			con = DriverManager.getConnection(dbUrl, dbUser, dbPass);
+			String sql = "UPDATE article SET title = ?, content = ? "
+					+ "WHERE article_id = ? AND password = ?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, rec.getTitle());
+			ps.setString(2, rec.getContent());
+			ps.setInt(3, rec.getArticleId());
+			ps.setString(4, rec.getPassword());
+			
+			int result = ps.executeUpdate();
+			return result; // 나중에 수정된 수를 리턴하시오.
 		
 		}catch( Exception ex ){
 			throw new BoardException("게시판 ) 게시글 수정시 오류  : " + ex.toString() );	
@@ -244,9 +346,16 @@ public class BoardDao
 
 		PreparedStatement ps = null;
 		try{
+			con = DriverManager.getConnection(dbUrl, dbUser, dbPass);
+			String sql = "DELETE FROM article "
+					+ "WHERE article_id = ? AND password = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, article_id);
+			ps.setString(2, password);
+			
+			int result = ps.executeUpdate();
 
-
-			return 0; // 나중에 수정된 수를 리턴하시오.
+			return result; // 나중에 수정된 수를 리턴하시오.
 		
 		}catch( Exception ex ){
 			throw new BoardException("게시판 ) 게시글 수정시 오류  : " + ex.toString() );	

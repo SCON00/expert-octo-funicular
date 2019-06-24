@@ -49,16 +49,22 @@
 				var menuCount = (data.eq(i).find('td').eq(1).text());
 				var menuId = data.eq(i).find('input[type="hidden"]').val();
 				
-				var rs = {'menuId' : menuId, 'menuCount' : menuCount};
+				var rs = new Object();
+				rs.menuId = menuId;
+				rs.menuCount = menuCount;
 				list.push(rs);
 			}
 			
+			//JSON.stringify(list)
 			$.ajax({
 				type : "POST",
-				data : {'list' :list},
+				data : {param : JSON.stringify(list)},
 				url : "OrderMenu.jsp",
 				success : function(result){
-					alert(result);
+					alert(result + " 주문 완료");
+				},
+				error: function(request,status,error){
+				    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 				}
 			});
 		});

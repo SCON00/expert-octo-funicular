@@ -40,9 +40,9 @@
 	<tr>
 		<td colspan="2">
 			목록보기
-			답변하기
-			수정하기
-			삭제하기 	
+			<a href="BoardReplyForm.jsp?parent_id=<%=id%>">답변하기</a>
+			<a href="BoardModifyForm.jsp?article_id=<%=id%>">수정하기</a>
+			<a href="BoardDeleteForm.jsp?article_id=<%=id%>">삭제하기</a> 	
 		</td>
 	</tr>
 	</table>

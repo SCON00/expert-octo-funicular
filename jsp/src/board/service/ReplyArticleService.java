@@ -19,6 +19,8 @@ public class ReplyArticleService {
 		return instance;
 	}
 	
+	private ReplyArticleService(){}
+	
 	public BoardRec reply( String pId,  BoardRec rec ) throws BoardException{
 		
 		int parentId = 0;

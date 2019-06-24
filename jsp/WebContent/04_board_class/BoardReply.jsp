@@ -11,10 +11,10 @@
 </jsp:useBean>
 
 <%
-	// 1. 부모게시물의 게시번호를 넘겨받기
-	
+	// 1. 부모게시물의 게시번호를 넘겨받기	
+	String parentId = request.getParameter("parent_id");
 	// 2. Service에 reply() 호출하여 답변글 등록하기
-	BoardRec reRec = null;
+	BoardRec reRec = ReplyArticleService.getInstance().reply(parentId, rec);
 
 %>
     

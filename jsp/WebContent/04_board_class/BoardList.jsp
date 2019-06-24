@@ -11,12 +11,16 @@
 %>
 
 <%
-
-// Service에 getArticleList()함수를 호출하여 전체 메세지 레코드 검색 
- List <BoardRec> mList =  null; 
-
+	//Service에 getArticleList()함수를 호출하여 전체 메세지 레코드 검색 
+	ListArticleService las = ListArticleService.getInstance();
+	// 페이지 수를 얻어오기
+	int pageCount = las.getTotalPage();
+	// 페이지 번호 받기
+	String pNum = request.getParameter("page");
+	// 전체 메세지 레코드 검색 
+	List <BoardRec> mList =  las.getArticleList(pNum);
+ 	
 %>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,18 +44,30 @@
 
 	<% if( mList.isEmpty() ) { %>
 		<tr><td colspan="5"> 등록된 게시물이 없습니다. </td></tr>
-	<% } else { %>
-	
-		
+	<% 
+		} else { 
+			for(BoardRec b : mList){
+	%>		
 		<tr>
-			<td></td>
-			<td></td>
-			<td></td>		
-			<td></td>
-			<td></td>
+			<td><%=b.getArticleId() %></td>
+			<td>
+				<% for(int i=0; i<b.getLevel(); i++) { %> 
+					&nbsp;
+				<% } %>
+				<% if(b.getLevel() > 0){ %>
+					<img alt="" src="./imgs/board_re.gif">
+				<% } %>
+				<a href='BoardView.jsp?article_id=<%=b.getArticleId()%>'><%=b.getTitle() %></a>
+			</td>
+			<td><%=b.getWriterName() %></td>		
+			<td><%=b.getPostingDate() %></td>
+			<td><%=b.getReadCount() %></td>
 		</tr>
 
-	<% } // end else %>
+	<%
+			} // end for
+		} // end else 
+	%>
 	
 		<tr>
 			<td colspan="5">
@@ -59,5 +75,9 @@
 			</td>
 		</tr>
 	</table>
+	<!-- 페이지 번호 출력 -->
+	<% for(int i = 1; i <= pageCount; i++) { %>
+		<a href="BoardList.jsp?page=<%=i%>">[<%=i %>]</a>
+	<% } // end of for %>
 </BODY>
 </HTML>
