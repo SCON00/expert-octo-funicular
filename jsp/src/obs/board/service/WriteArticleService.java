@@ -1,8 +1,8 @@
-package board.service;
+package obs.board.service;
 
 import java.text.DecimalFormat;
 
-import board.model.*;
+import obs.board.model.*;
 
 public class WriteArticleService {
 	

@@ -1,23 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="board.model.*,board.service.*" %>
+<%@ page import="mvc.board.model.*" %>
  
 <%
 	// 0. 넘겨받는 한글 깨지지 않도록 지정
 	request.setCharacterEncoding("UTF-8");
-%>
 
-<!--  1. 전 화면 입력값을 넘겨받아 BoardRec 클래스의 각 멤버필드에 지정 -->
-<jsp:useBean id="rec" class="board.model.BoardRec">
-	<jsp:setProperty name="rec" property="*"/>
-</jsp:useBean>
-<%
-	// 2. Service클래스에 write() 함수호출
-	
-	BoardRec result = WriteArticleService.getInstance().write(rec);
+	// 2. Service클래스에 write() 함수호출	
+	BoardRec result = (BoardRec)request.getAttribute("param");
 
 	// 3. 화면을 리다이렉트로 바꾸기
-	response.sendRedirect("BoardView.jsp?article_id=" + result.getArticleId());
+	response.sendRedirect("/jsp/board?cmd=article-page&article_id=" + result.getArticleId());
 %>
 <!DOCTYPE html>
 <html>

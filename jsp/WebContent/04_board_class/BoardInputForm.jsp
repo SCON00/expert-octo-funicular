@@ -12,7 +12,7 @@ $(function(){
 	// 작성 버튼이 눌렸을 때
 	$('input[value="작성"]').click(function(){
 		// 폼태그의 action 속성을 'BoardSave.jsp', submit() 호출
-		frm.attr('action','BoardSave.jsp').submit();
+		frm.attr('action','/jsp/board?cmd=input-do').submit();
 	});
 });
 </script>

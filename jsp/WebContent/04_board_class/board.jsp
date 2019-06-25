@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String projectName = "/jsp";
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,10 +10,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href='BoardInputForm.jsp'>게시글 쓰기</a>
+<a href='<%=projectName %>/board?cmd=input-page'>게시글 쓰기</a>
 <hr/>
-<a href='BoardView.jsp?article_id=2'>2번글 내용보기</a>
+<a href='<%=projectName %>/board?cmd=article-page&article_id=2'>2번글 내용보기</a>
 <hr/>
-<a href='BoardList.jsp'>목록보기</a>
+<a href='<%=projectName %>/board?cmd=list-page'>목록보기</a>
 </body>
 </html>

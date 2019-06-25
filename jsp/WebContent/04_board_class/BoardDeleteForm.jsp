@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="board.service.*, board.model.*" %>
+<%@ page import="obs.board.service.*,obs.board.model.*" %>
 <%
 	// 1. 삭제할 레코드의 게시글번호 넘겨받기
 	String id = request.getParameter("article_id");
+	String projectName = "/jsp";
 %>       
 <!DOCTYPE html>
 <html>
@@ -13,7 +14,7 @@
 </head>
 <body>
 
-<form method="get" action="BoardDelete.jsp">
+<form method="post" action="<%=projectName%>/board?cmd=delete-do">
 	삭제할 글암호를 입력하세요 <br/>
 	<input type="password" name="password">
 	<!-- 게시글번호를 다음 페이지로 넘기기 위해 hidden 태그로 지정 -->

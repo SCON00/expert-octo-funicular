@@ -1,10 +1,10 @@
-package board.service;
+package obs.board.service;
 
 import java.util.List;
 
-import board.model.BoardDao;
-import board.model.BoardException;
-import board.model.BoardRec;
+import obs.board.model.BoardDao;
+import obs.board.model.BoardException;
+import obs.board.model.BoardRec;
 
 public class ListArticleService {
 	private static ListArticleService instance;

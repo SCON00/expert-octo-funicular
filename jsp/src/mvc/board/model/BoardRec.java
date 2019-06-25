@@ -1,4 +1,4 @@
-package board.model;
+package mvc.board.model;
 
 public class BoardRec
 {

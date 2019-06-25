@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%
+	String projectName = "/jsp";
 	// 답변글의 부모 게시글의 번호를 넘겨받기
 	String parentId = request.getParameter("parent_id");
 %>
@@ -15,7 +16,7 @@
  <body>
 	<h4> 답변 글 쓰기 </h4><br/>
 	
-	<form name='frm' method='post' action="BoardReply.jsp">
+	<form name='frm' method='post' action="<%=projectName %>/board?cmd=reply-do">
 	<input type="hidden" name="parent_id" value="<%=parentId %>"/>
 	작성자 : <input type='text' name='writerName'><br/><br/>
 	제  목 : <input type='text' name='title'><br/><br/>

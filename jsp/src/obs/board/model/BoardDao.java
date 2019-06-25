@@ -1,4 +1,4 @@
-package board.model;
+package obs.board.model;
 
 
 import java.sql.*;

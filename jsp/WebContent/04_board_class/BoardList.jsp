@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="board.model.*, board.service.*" %>
+<%@ page import="mvc.board.model.*" %>
 <%@ page import="java.util.List" %>
  
 <%  //웹브라우저가 게시글 목록을 캐싱할 경우 새로운 글이 추가되더라도 새글이 목록에 안 보일 수 있기 때문에 설정
@@ -11,14 +11,11 @@
 %>
 
 <%
-	//Service에 getArticleList()함수를 호출하여 전체 메세지 레코드 검색 
-	ListArticleService las = ListArticleService.getInstance();
+	String projectName = "/jsp";
 	// 페이지 수를 얻어오기
-	int pageCount = las.getTotalPage();
-	// 페이지 번호 받기
-	String pNum = request.getParameter("page");
+	int pageCount = (Integer)request.getAttribute("pageCount");
 	// 전체 메세지 레코드 검색 
-	List <BoardRec> mList =  las.getArticleList(pNum);
+	List <BoardRec> mList =  (List<BoardRec>)request.getAttribute("param");
  	
 %>
 <!DOCTYPE html>
@@ -55,9 +52,9 @@
 					&nbsp;
 				<% } %>
 				<% if(b.getLevel() > 0){ %>
-					<img alt="" src="./imgs/board_re.gif">
+					<img alt="" src="/jsp/04_board_class/imgs/board_re.gif">
 				<% } %>
-				<a href='BoardView.jsp?article_id=<%=b.getArticleId()%>'><%=b.getTitle() %></a>
+				<a href='<%=projectName%>/board?cmd=article-page&article_id=<%=b.getArticleId()%>'><%=b.getTitle() %></a>
 			</td>
 			<td><%=b.getWriterName() %></td>		
 			<td><%=b.getPostingDate() %></td>
@@ -71,13 +68,13 @@
 	
 		<tr>
 			<td colspan="5">
-				<a href="BoardInputForm.jsp">글쓰기</a>
+				<a href="<%=projectName%>/board?cmd=input-page">글쓰기</a>
 			</td>
 		</tr>
 	</table>
 	<!-- 페이지 번호 출력 -->
 	<% for(int i = 1; i <= pageCount; i++) { %>
-		<a href="BoardList.jsp?page=<%=i%>">[<%=i %>]</a>
+		<a href="<%=projectName%>/board?cmd=list-page&page=<%=i%>">[<%=i %>]</a>
 	<% } // end of for %>
 </BODY>
 </HTML>

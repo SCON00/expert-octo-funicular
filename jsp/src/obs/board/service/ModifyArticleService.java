@@ -1,6 +1,6 @@
-package board.service;
+package obs.board.service;
 
-import board.model.*;
+import obs.board.model.*;
 
 public class ModifyArticleService {
 	

@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="board.model.*,board.service.*" %>
+<%@ page import="mvc.board.model.*" %>
  
 <%
-	// 1. 삭제할 레코드의 게시글번호와 비밀번호를 넘겨받기
-	String id = request.getParameter("article_id");
-	String pass = request.getParameter("password");
-	// 2. Service에 delete() 호출	
-	int result =  DeleteArticleService.getInstance().delete(id, pass);
+	String projectName = "/jsp";
+	// 1. 삭제 요청 결과 정수 값
+	int result = (Integer)request.getAttribute("result");
 %>
 <!DOCTYPE html>
 <html>
@@ -23,6 +21,6 @@
 			삭제가 실패되었습니다.
 	<% } %>
 	<br/><br/>
-	<a href="BoardList.jsp"> 목록보기 </a>
+	<a href="<%=projectName%>/board?cmd=list-page"> 목록보기 </a>
 </body>
 </html>
