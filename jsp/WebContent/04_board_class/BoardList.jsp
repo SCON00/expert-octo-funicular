@@ -13,7 +13,7 @@
 <%
 	String projectName = "/jsp";
 	// 페이지 수를 얻어오기
-	int pageCount = (Integer)request.getAttribute("pageCount");
+	//int pageCount = (Integer)request.getAttribute("pageCount");
 	// 전체 메세지 레코드 검색 
 	List <BoardRec> mList =  (List<BoardRec>)request.getAttribute("param");
  	
@@ -72,9 +72,11 @@
 			</td>
 		</tr>
 	</table>
+	<%-- 
 	<!-- 페이지 번호 출력 -->
 	<% for(int i = 1; i <= pageCount; i++) { %>
 		<a href="<%=projectName%>/board?cmd=list-page&page=<%=i%>">[<%=i %>]</a>
 	<% } // end of for %>
+	 --%>
 </BODY>
 </HTML>

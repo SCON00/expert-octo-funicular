@@ -6,8 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import mvc.board.model.BoardDao;
-import mvc.board.model.BoardRec;
 import mvc.board.model.BoardException;
+import mvc.board.model.BoardRec;
+import mvc.board.service.BoardService;
 
 public class CommandList implements Command 
 {
@@ -37,7 +38,8 @@ public class CommandList implements Command
 			int startRow = countPerPage * (pageNum - 1) + 1;
 			int endRow = pageNum * countPerPage;
 			
-			List <BoardRec> mList = BoardDao.getInstance().selectList(startRow,endRow);			
+			List <BoardRec> mList = BoardService.getInstance().selectArticle();			
+			//List <BoardRec> mList = BoardDao.getInstance().selectList(startRow,endRow);			
 			request.setAttribute("param", mList );
 			request.setAttribute("pageCount", getTotalPage());
 			
