@@ -39,7 +39,7 @@
 	</tr>
 	<tr>
 		<td scope="row" colspan="2">
-		<div class="btn-group" role="group">
+		<div class="btn-group" role="group" aria-label="Article Control">
 			<a href="<%=projectName%>/board?cmd=list-page" class="btn btn-secondary">목록보기</a>
 			<a href="<%=projectName%>/board?cmd=reply-page&parent_id=<%=rec.getArticleId()%>" class="btn btn-secondary">답변하기</a>
 			<a href="<%=projectName%>/board?cmd=modify-page&article_id=<%=rec.getArticleId()%>" class="btn btn-secondary">수정하기</a>
