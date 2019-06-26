@@ -21,17 +21,17 @@
 <script type="text/javascript">
 $(function(){
 	$('form').find('button').click(function(){
-		var param = {
-						testName : $('#test_id').val(),
-						testNumber : $('#test_number').val(),
-						testCate : $('#test_category').val()
-					};
+		
 		$.ajax({
 			type : "POST",
-			data : param,
+			data : {
+				testName : $('#test_id').val(),
+				testNumber : $('#test_number').val(),
+				testCate : $('#test_category').val()
+			},
 			url : "AddMember.jsp",
-			dataType : "json",
 			success : function(result){
+				console.log(result);
 				getData();
 			},
 			error : function(e){
@@ -44,14 +44,26 @@ function getData(){
 	$.ajax({
 		type: "POST",
 		url : "SelectTest.jsp",
+		dataType : "json",
 		success : function(result){
-			console.log(result);
+			var list = $('#member_list').empty();
+			for(var i=0; i<result.length; i++){
+				var data = "<tr><th scope='row'>";
+				data += result[i].testId + "</th><td>";
+				data += result[i].testName + "</td><td>";
+				data += result[i].testNum + "</td><td>";
+				data += result[i].testCate + "</td><td>";
+				data += result[i].testDate + "</td></tr>";
+				list.append(data);
+				console.log(result[i]);
+			}
+			
 		}
 	});
 }
 </script>
 </head>
-<body>
+<body class="bg-dark">
 
 	<div class="container">
 		<table class="table table-hover table-dark table-striped">
@@ -72,7 +84,7 @@ function getData(){
 								<label for="test_category" class="sr-only">Test Category</label>
 								<input type="text" class="form-control" id="test_category" name="testCate" placeholder="Test Category">
 							</div>
-							<button type="button" class="btn btn-primary mx-sm-3 mb-2">등록</button>
+							<button type="button" class="btn btn-outline-light mx-sm-3 mb-2">등록</button>
 						</form>
 					</th>
 				</tr>
@@ -81,10 +93,10 @@ function getData(){
 					<th scope="col">Test NAME</th>
 					<th scope="col">Test NUMBER</th>
 					<th scope="col">Test CATEGORY</th>
-					<th scope="col">Test TIME</th>
+					<th scope="col">Test DATE</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody id="member_list">
 
 				<%
 					for (TestModel t : tm) {

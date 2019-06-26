@@ -10,10 +10,10 @@
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v9.0"/>
-	<classpathentry kind="lib" path="E:/mywork/git/expert-octo-funicular/EX0531/WebContent/WEB-INF/lib/gson-2.8.2.jar"/>
-	<classpathentry kind="lib" path="E:/mywork/git/expert-octo-funicular/EX0531/WebContent/WEB-INF/lib/json-simple-1.1.1.jar"/>
-	<classpathentry kind="lib" path="E:/mywork/git/expert-octo-funicular/EX0531/WebContent/WEB-INF/lib/jstl.jar"/>
-	<classpathentry kind="lib" path="E:/mywork/git/expert-octo-funicular/EX0531/WebContent/WEB-INF/lib/mariadb-java-client-2.4.2.jar"/>
-	<classpathentry kind="lib" path="E:/mywork/git/expert-octo-funicular/EX0531/WebContent/WEB-INF/lib/standard.jar"/>
+	<classpathentry kind="lib" path="libs/gson-2.8.2.jar"/>
+	<classpathentry kind="lib" path="libs/json-simple-1.1.1.jar"/>
+	<classpathentry kind="lib" path="libs/jstl.jar"/>
+	<classpathentry kind="lib" path="libs/mariadb-java-client-2.4.2.jar"/>
+	<classpathentry kind="lib" path="libs/standard.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

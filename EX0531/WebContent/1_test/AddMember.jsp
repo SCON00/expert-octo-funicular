@@ -3,16 +3,13 @@
 <%@ page import="model.*, model.service.*, com.google.gson.*, java.util.*" %>
 <%
 	request.setCharacterEncoding("UTF-8");
-	JsonParser jsonParser = new JsonParser();
-	JsonObject jo = jsonParser.parse(request.getParameter("param")).getAsJsonObject();
 
 	TestModel tm = new TestModel();
-	tm.setTestName(jo.get("testName").getAsString());
-	tm.setTestNum(jo.get("testNumber").getAsInt());
-	tm.setTestCate(jo.get("testCate").getAsString());
+	tm.setTestName(request.getParameter("testName"));
+	tm.setTestNum(Integer.parseInt(request.getParameter("testNumber")));
+	tm.setTestCate(request.getParameter("testCate"));
 	
-	List<TestModel> result = TestService.getInstance().getList();
+	int result = TestService.getInstance().addMember(tm);
 	
-	String str = new Gson().toJson(result);
-	out.write(str);
+	out.write(result);
 %>
