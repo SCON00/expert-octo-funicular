@@ -11,4 +11,39 @@
 		</where> 
 		ORDER BY sequence_no DESC
 	</select>
+	
+	<select id="selectGroupId" resultType="int">
+		SELECT SEQ_GROUP_ID_ARTICLE.nextval AS group_id FROM dual
+	</select>
+	
+	<insert id="insertArticle" parameterType="BoardRec">
+		INSERT INTO article 
+		(
+			article_id
+			,group_id
+			,sequence_no
+			,posting_date
+			,read_count
+			,writer_name
+			,password
+			,title
+			,content
+		)
+		VALUES
+		(
+			SEQ_ARTICLE_ID_ARTICLE.nextval
+			,#{groupId}
+			,#{sequenceNo}
+			,sysdate
+			,0
+			,#{writerName}
+			,#{password}
+			,#{title}
+			,#{content}
+		)
+	</insert>
+	<select id="selectArticleId" resultType="int">
+		SELECT SEQ_ARTICLE_ID_ARTICLE.currval AS article_id FROM dual
+	</select>
+	
 </mapper>

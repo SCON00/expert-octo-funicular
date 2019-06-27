@@ -12,6 +12,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>답변 글쓰기</title>
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+<meta name="viewport" content="width=device-width" />
+<link href="/jsp/bootstrap4/css/bootstrap.css" rel="stylesheet" />
+<script type="text/javascript" src='/jsp/jquery/jquery-3.4.1.min.js'></script>
+<script type="text/javascript" src='/jsp/bootstrap4/js/bootstrap.min.js'></script>
 </head>
 <body>
 

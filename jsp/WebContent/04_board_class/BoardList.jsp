@@ -28,8 +28,6 @@
 	name='viewport' />
 <meta name="viewport" content="width=device-width" />
 <link href="/jsp/bootstrap4/css/bootstrap.css" rel="stylesheet" />
-<link href="/jsp/bootstrap4/css/bootstrap-theme.css" rel="stylesheet" />
-<link href="/jsp/bootstrap4/css/font-awesome.css" rel="stylesheet" />
 <script type="text/javascript" src='/jsp/jquery/jquery-3.4.1.min.js'></script>
 <script type="text/javascript" src='/jsp/bootstrap4/js/bootstrap.min.js'></script>
 
@@ -66,13 +64,12 @@
 				<td>
 					<%
 						for (int i = 0; i < b.getLevel(); i++) {
-					%> &nbsp; <%
+					%> &nbsp;&nbsp; <%
  	}
  %> <%
  	if (b.getLevel() > 0) {
  %>
-					<img alt="" src="/jsp/04_board_class/imgs/board_re.gif"><span
-					class="badge badge-secondary">Re</span> <%
+					<span class="badge badge-secondary">Re</span> <%
  	}
  %> <a
 					href='<%=projectName%>/board?cmd=article-page&article_id=<%=b.getArticleId()%>'><%=b.getTitle()%></a>

@@ -52,4 +52,34 @@ public class BoardRepository
 			sess.close(); // Connection 을 MyBatis 에게 반환
 		}
 	}
+
+	// 글 입력
+	public int insertArticle(BoardRec rec) {
+		SqlSession sess = getSqlSessionFactory().openSession();
+		try {
+			int result = sess.insert(namespace + ".insertArticle", rec);
+			int id = sess.selectOne(namespace + ".selectArticleId");	// 입력한 글의 고유번호 요청
+			if(result > 0) {				
+				sess.commit();
+				return id;
+			} else {
+				sess.rollback();
+				return 0;
+			}
+		} finally {
+			sess.close(); // Connection 을 MyBatis 에게 반환
+		}
+	}
+
+	// 그룹 번호 검색
+	public int getGroupId() {
+		SqlSession sess = getSqlSessionFactory().openSession();
+		try {
+			
+			return sess.selectOne(namespace + ".selectGroupId");
+		} finally {
+			sess.close(); // Connection 을 MyBatis 에게 반환
+		}
+	}
+
 }

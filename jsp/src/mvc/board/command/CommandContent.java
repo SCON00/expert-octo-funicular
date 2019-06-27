@@ -20,9 +20,7 @@ public class CommandContent implements Command{
 			int id = Integer.parseInt(request.getParameter("article_id"));
 //		    BoardRec rec = BoardDao.getInstance().selectById(id);	
 		    BoardRec rec = BoardService.getInstance().selectArticleByPrimaryKey(id);	
-		    request.setAttribute("param", rec );
-
-		
+		    request.setAttribute("param", rec );		
 		
 		return next;
 	}
