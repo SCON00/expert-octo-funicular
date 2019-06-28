@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import mvc.board.model.BoardDao;
 import mvc.board.model.BoardException;
 import mvc.board.model.BoardRec;
+import mvc.board.service.BoardService;
 
 public class CommandReply implements Command
 {
@@ -31,9 +32,9 @@ public class CommandReply implements Command
 		    
 			if( pId != null ) parentId = Integer.parseInt(pId);
 			
-			BoardDao dao = BoardDao.getInstance();
+			BoardService bs = BoardService.getInstance();
 			// 부모게시글의 레코드를 얻어옴
-			BoardRec parent = dao.selectById(parentId);
+			BoardRec parent = bs.selectArticleByPrimaryKey(parentId);
 			
 			// 부모게시글을 체크
 			checkParent(parent, parentId);
@@ -42,7 +43,7 @@ public class CommandReply implements Command
 			String maxSeqNum = parent.getSequenceNo();
 			String minSeqNum = getSearchMinSeqNum( parent );
 			
-			String lastChildSeq = dao.selectLastSequenceNumber( maxSeqNum, minSeqNum );
+			String lastChildSeq = bs.selectLastSequenceNumber( maxSeqNum, minSeqNum );
 			
 			String sequenceNumber = getSequenceNumber( parent,lastChildSeq);
 			
@@ -51,8 +52,7 @@ public class CommandReply implements Command
 			rec.setSequenceNo(sequenceNumber);	 // 위에서 구한 답변글의 순서번호 지정
 			rec.setPostingDate( (new Date()).toString());	 // 등록일
 			
-			int articleId = dao.insert(rec);
-			rec.setArticleId(articleId);
+			rec = bs.insertArticle(rec);
 			
 			request.setAttribute("result", rec);
 		}catch( BoardException ex ){

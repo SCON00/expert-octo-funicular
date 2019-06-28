@@ -23,6 +23,9 @@ public class BoardService {
 	public List<BoardRec> selectArticle(){
 		return repo.selectArticle();
 	}
+	public List<BoardRec> selectArticle(int startRow, int endRow){
+		return repo.selectArticle(startRow, endRow);
+	}
 	
 	// 글번호로 검색
 	public BoardRec selectArticleByPrimaryKey(int cId) {
@@ -31,17 +34,37 @@ public class BoardService {
 	// 입력 
 	public BoardRec insertArticle(BoardRec rec) { 
 		
-		int groupId = repo.getGroupId();	// 그룹번호 검색
-		rec.setGroupId(groupId);
+		if(rec.getGroupId() < 1) {
+			int groupId = repo.getGroupId();	// 그룹번호 검색
+			rec.setGroupId(groupId);
+			// 순서번호(sequence_no) 지정
+			DecimalFormat dformat = new DecimalFormat("0000000000");
+			rec.setSequenceNo( dformat.format(groupId) + "999999");
+			// groupId = 1 이라면 00000000001999999
+			// groupId = 1234 이라면 00000001234999999
+		}	
 		
-		// 순서번호(sequence_no) 지정
-		DecimalFormat dformat = new DecimalFormat("0000000000");
-		rec.setSequenceNo( dformat.format(groupId) + "999999");
-		// groupId = 1 이라면 00000000001999999
-		// groupId = 1234 이라면 00000001234999999
 		// DB에 insert
 		rec.setArticleId(repo.insertArticle(rec));
 		return rec;
+	}
+
+	public int getTotalCount() {
+		return repo.getTotalCount();
+	}
+
+	public int updateArticle(BoardRec rec) {
+		return repo.updateArticle(rec);
+	}
+
+	public void increaseReadCount(int id) {
+		repo.increaseReadCount(id);
+		
+	}
+
+	public String selectLastSequenceNumber(String maxSeqNum, String minSeqNum) {
+		
+		return repo.selectLastSequenceNumber(maxSeqNum, minSeqNum);
 	}
 
 	/*

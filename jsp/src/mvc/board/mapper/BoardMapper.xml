@@ -8,12 +8,31 @@
 			<if test="articleId != null">
 				article_id = #{articleId}
 			</if>
+			<if test="startRow != null AND endRow != null">
+				
+			</if>
 		</where> 
 		ORDER BY sequence_no DESC
 	</select>
 	
+	<select id="selectArticleByPage" parameterType="hashmap" resultType="BoardRec">
+		SELECT * FROM 
+			(SELECT ROW_NUMBER() OVER(ORDER BY sequence_no DESC) AS rnum
+			, article_id
+			, title
+			, writer_name
+			, posting_date
+			, read_count
+			, sequence_no  
+			FROM article) a 
+		WHERE rnum BETWEEN #{startRow} AND #{endRow}
+	</select>
+	
 	<select id="selectGroupId" resultType="int">
 		SELECT SEQ_GROUP_ID_ARTICLE.nextval AS group_id FROM dual
+	</select>
+	<select id="selectTotalCount" resultType="int">
+		SELECT COUNT(*) cnt FROM article
 	</select>
 	
 	<insert id="insertArticle" parameterType="BoardRec">
@@ -44,6 +63,16 @@
 	</insert>
 	<select id="selectArticleId" resultType="int">
 		SELECT SEQ_ARTICLE_ID_ARTICLE.currval AS article_id FROM dual
+	</select>
+	<update id="updateArticle" parameterType="BoardRec">
+		UPDATE article SET title = #{title}, content = #{content} 
+		WHERE article_id = #{articleId} AND password = #{password}
+	</update>
+	<update id="updateReadCount" parameterType="int">
+		UPDATE article SET read_count = read_count + 1 WHERE article_id = #{articleId}
+	</update>
+	<select id="selectLastSeqNum" parameterType="hashmap" resultType='String'>
+		SELECT min(sequence_no) as minseq FROM article WHERE sequence_no <![CDATA[<]]> #{maxSeqNum} AND sequence_no >= #{minSeqNum}
 	</select>
 	
 </mapper>

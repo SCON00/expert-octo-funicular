@@ -3,7 +3,8 @@
 <configuration>
 
 	<!-- db connect file -->
-	<properties resource="db.properties"></properties>
+	<!-- <properties resource="db.properties"></properties> -->
+	<properties resource="homedb.properties"></properties>
 	
 	<!-- 기타 설정 -->
 	<settings>

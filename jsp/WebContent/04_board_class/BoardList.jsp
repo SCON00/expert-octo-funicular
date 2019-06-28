@@ -14,7 +14,7 @@
 <%
 	String projectName = "/jsp";
 	// 페이지 수를 얻어오기
-	//int pageCount = (Integer)request.getAttribute("pageCount");
+	int pageCount = (Integer)request.getAttribute("pageCount");
 	// 전체 메세지 레코드 검색 
 	List<BoardRec> mList = (List<BoardRec>) request.getAttribute("param");
 %>
@@ -64,15 +64,13 @@
 				<td>
 					<%
 						for (int i = 0; i < b.getLevel(); i++) {
-					%> &nbsp;&nbsp; <%
- 	}
- %> <%
- 	if (b.getLevel() > 0) {
- %>
-					<span class="badge badge-secondary">Re</span> <%
- 	}
- %> <a
-					href='<%=projectName%>/board?cmd=article-page&article_id=<%=b.getArticleId()%>'><%=b.getTitle()%></a>
+					%> 
+					&nbsp;&nbsp; 
+					<%	}  %> 
+					<% 	if (b.getLevel() > 0) { %> 
+					<span class="badge badge-secondary">Re</span> 
+					<% 	} %> 
+					<a href='<%=projectName%>/board?cmd=article-page&article_id=<%=b.getArticleId()%>' class='btn btn-outline-secondary'><%=b.getTitle()%></a>
 				</td>
 				<td><%=b.getWriterName()%></td>
 				<td><%=b.getPostingDate()%></td>
@@ -83,27 +81,37 @@
 				} // end for
 				} // end else
 			%>
-
 			<tr>
 				<td scope="row" colspan="5"><a
-					href="<%=projectName%>/board?cmd=input-page">글쓰기</a></td>
+					href="<%=projectName%>/board?cmd=input-page" class="btn btn-outline-secondary">글쓰기</a></td>
 			</tr>
+			<tr>
+				<td scope="row" colspan="5">
+					<!-- 페이지 번호 출력 -->
+					<nav aria-label="Page navigation">
+						<ul class="pagination">
+							<li class="page-item"><a class="page-link" href="#">Previous</a></li>
+							<%
+								for (int i = 1; i <= pageCount; i++) {
+							%>
+
+							<li class="page-item"><a class="page-link"
+								href="<%=projectName%>/board?cmd=list-page&page=<%=i%>"><%=i%></a></li>
+							<%
+								} // end of for
+							%>
+							<li class="page-item"><a class="page-link" href="#">Next</a></li>
+						</ul>
+					</nav>
+				</td>
+			</tr>
+			
 		</tbody>
 	</table>
-	<%-- 
-	<!-- 페이지 번호 출력 -->
-	<% for(int i = 1; i <= pageCount; i++) { %>
-		<a href="<%=projectName%>/board?cmd=list-page&page=<%=i%>">[<%=i %>]</a>
-	<% } // end of for %>
-	<nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-  </ul>
-</nav>
-	 --%>
+
+
+
+
+
 </body>
 </HTML>

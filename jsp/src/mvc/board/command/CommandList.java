@@ -5,7 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import mvc.board.model.BoardDao;
 import mvc.board.model.BoardException;
 import mvc.board.model.BoardRec;
 import mvc.board.service.BoardService;
@@ -38,7 +37,7 @@ public class CommandList implements Command
 			int startRow = countPerPage * (pageNum - 1) + 1;
 			int endRow = pageNum * countPerPage;
 			
-			List <BoardRec> mList = BoardService.getInstance().selectArticle();			
+			List <BoardRec> mList = BoardService.getInstance().selectArticle(startRow,endRow);			
 			//List <BoardRec> mList = BoardDao.getInstance().selectList(startRow,endRow);			
 			request.setAttribute("param", mList );
 			request.setAttribute("pageCount", getTotalPage());
@@ -52,7 +51,7 @@ public class CommandList implements Command
 	
 	public int getTotalPage() throws BoardException{
 		// 전체 레코드 수를 얻어옴
-		totalRecCount = BoardDao.getInstance().getTotalCount();
+		totalRecCount = BoardService.getInstance().getTotalCount();
 				
 		// 전체 페이지 수를 구함
 		pageTotalCount = totalRecCount / countPerPage + ((totalRecCount % countPerPage == 0)? 0 : 1);
