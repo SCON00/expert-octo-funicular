@@ -8,9 +8,6 @@
 			<if test="articleId != null">
 				article_id = #{articleId}
 			</if>
-			<if test="startRow != null AND endRow != null">
-				
-			</if>
 		</where> 
 		ORDER BY sequence_no DESC
 	</select>
